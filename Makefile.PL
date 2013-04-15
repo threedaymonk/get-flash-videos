@@ -28,13 +28,16 @@ my %mm_vars = (
     },
 );
 
+$ExtUtils::MakeMaker::VERSION =~ /^\d+\.\d+/;
+my $make_maker_version = $&;
+
 # Needed for reasonable UTF-8 support, also modules are used that are
 # core perl as reported by 'corelist' since 5.8.
-if($ExtUtils::MakeMaker::VERSION >= 6.48) {
+if($make_maker_version >= 6.48) {
   $mm_vars{MIN_PERL_VERSION} = 5.008;
 }
 
-if($ExtUtils::MakeMaker::VERSION >= 6.46) {
+if($make_maker_version >= 6.46) {
   $mm_vars{META_MERGE} = {
     resources        => {
       license        => 'http://www.apache.org/licenses/LICENSE-2.0.html',
@@ -45,7 +48,7 @@ if($ExtUtils::MakeMaker::VERSION >= 6.46) {
 }
 
 my $build_req;
-if($ExtUtils::MakeMaker::VERSION >= 6.55) {
+if($make_maker_version >= 6.55) {
   $build_req = $mm_vars{BUILD_REQUIRES} ||= {};
 } else {
   $build_req = $mm_vars{PREREQ_PM};
